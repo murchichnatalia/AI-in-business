@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // 🔧 ФУНКЦИЯ ДЛЯ ЛОГГИРОВАНИЯ В GOOGLE ТАБЛИЦУ
 async function logToGoogleSheet(review, sentimentLabel, confidenceScore, meta = {}) {
     // 🚨 ВАЖНО: Замените эту строку на реальный URL вашего Apps Script Web App!
-    const GOOGLE_SCRIPT_URL = 'ВАШ_GOOGLE_APPS_SCRIPT_URL_ЗДЕСЬ';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzCt2ngC9_QFfb64da09yYgA0tyK1x9PedjWiVazUVe76TL1jCPzfrUV6DqE--z5FEP/exec';
 
     // Если URL не задан, просто выходим (логируем в консоль для отладки)
     if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('ВАШ_GOOGLE_APPS_SCRIPT_URL')) {
@@ -256,6 +256,10 @@ function displaySentiment(result) {
         <i class="fas ${getSentimentIcon(sentiment)} icon"></i>
         <span>${label} (${(score * 100).toFixed(1)}% confidence)</span>
     `;
+
+    logToGoogleSheet(reviewText.textContent, label, score);
+    // reviewText.textContent — это текущий отзыв на экране
+    // label и score мы только что получили из анализа
 }
 
 // Get appropriate icon for sentiment bucket
