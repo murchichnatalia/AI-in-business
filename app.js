@@ -9,7 +9,7 @@ let apiToken = "";
 let sentimentPipeline = null;
 
 // URL Google Apps Script (🚨 УБЕДИТЕСЬ ЧТО ОН ПРАВИЛЬНЫЙ!)
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzCt2ngC9_QFfb64da09yYgA0tyK1x9PedjWiVazUVe76TL1jCPzfrUV6DqE--z5FEP/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw9nuasR1fCHWmp2zc0okzeIMLrYbojDWyiYRAAH6UnkelkO8Dp4EItNkhxlK5JvsM/exec';
 
 // Функция логирования - теперь она глобальная
 async function logToGoogleSheet(review, sentimentLabel, confidenceScore, meta = {}) {
