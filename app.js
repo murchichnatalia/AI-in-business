@@ -180,7 +180,7 @@ function getClientMetadata() {
 
 // *** ИЗМЕНЕНО: Новая функция для отправки данных в Google Apps Script ***
 async function logToGoogleSheet(data) {
-    if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbzL8JlLx2I1YjHknGHAp8jrbuialK9zI9wQ5bcbHU5joCESe8ly2Qg_aiY7Ajpo7zUG/exec') {
+    if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
         console.warn('Google Apps Script URL is not set. Skipping log.');
         return;
     }
