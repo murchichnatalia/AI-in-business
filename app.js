@@ -32,6 +32,57 @@ document.addEventListener("DOMContentLoaded", function () {
     apiToken = savedToken;
   }
 
+  // 🔧 ФУНКЦИЯ ДЛЯ ЛОГГИРОВАНИЯ В GOOGLE ТАБЛИЦУ
+async function logToGoogleSheet(review, sentimentLabel, confidenceScore, meta = {}) {
+    // 🚨 ВАЖНО: Замените эту строку на реальный URL вашего Apps Script Web App!
+    const GOOGLE_SCRIPT_URL = 'ВАШ_GOOGLE_APPS_SCRIPT_URL_ЗДЕСЬ';
+
+    // Если URL не задан, просто выходим (логируем в консоль для отладки)
+    if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('ВАШ_GOOGLE_APPS_SCRIPT_URL')) {
+        console.warn('⚠️ Google Script URL не настроен. Логирование отключено.');
+        return;
+    }
+
+    try {
+        // Формируем данные строго по заданию: Timestamp, Review, Sentiment, Meta
+        const logData = {
+            ts_iso: new Date().toISOString(),
+            review: review.substring(0, 500), // Обрезаем очень длинные отзывы
+            sentiment: `${sentimentLabel} (${(confidenceScore * 100).toFixed(1)}%)`,
+            meta: JSON.stringify({
+                // Добавляем всю возможную информацию о клиенте
+                userAgent: navigator.userAgent,
+                platform: navigator.platform,
+                language: navigator.language,
+                screenWidth: window.innerWidth,
+                screenHeight: window.innerHeight,
+                // Добавляем любые другие технические данные из meta
+                ...meta
+            })
+        };
+
+        console.log('📤 Отправляю данные для логирования:', logData);
+
+        // Отправляем POST-запрос в Google Apps Script
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'cors', // Важно для кросс-доменных запросов
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(logData)
+        });
+
+        const result = await response.text();
+        console.log('✅ Данные успешно отправлены в таблицу:', result);
+
+    } catch (error) {
+        // Ловим ошибку, но не прерываем работу приложения
+        console.error('❌ Ошибка при отправке данных в таблицу:', error);
+        // Можно добавить сюда уведомление для пользователя, но не обязательно
+    }
+}
+  
   // Initialize transformers.js sentiment model
   initSentimentModel();
 });
