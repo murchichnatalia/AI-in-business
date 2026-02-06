@@ -3,7 +3,7 @@
 import { pipeline } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.7.6/dist/transformers.min.js";
 
 // *** ИЗМЕНЕНО: Добавьте URL вашего развернутого Google Apps Script ***
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhMpi4nFuYvmvukolvT3OPve4_0CrYacILA4lHbXHwVJYwdiddo5ELFUr1mDPGm0zB/exec'; 
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzL8JlLx2I1YjHknGHAp8jrbuialK9zI9wQ5bcbHU5joCESe8ly2Qg_aiY7Ajpo7zUG/exec'; 
 
 // Global variables
 let reviews = [];
@@ -180,7 +180,7 @@ function getClientMetadata() {
 
 // *** ИЗМЕНЕНО: Новая функция для отправки данных в Google Apps Script ***
 async function logToGoogleSheet(data) {
-    if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbzhMpi4nFuYvmvukolvT3OPve4_0CrYacILA4lHbXHwVJYwdiddo5ELFUr1mDPGm0zB/exec') {
+    if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbzL8JlLx2I1YjHknGHAp8jrbuialK9zI9wQ5bcbHU5joCESe8ly2Qg_aiY7Ajpo7zUG/exec') {
         console.warn('Google Apps Script URL is not set. Skipping log.');
         return;
     }
